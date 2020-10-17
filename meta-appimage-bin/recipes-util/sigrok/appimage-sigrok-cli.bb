@@ -4,19 +4,13 @@ HOMEPAGE = "https://sigrok.org/wiki/Downloads#Linux_AppImage_binaries"
 PV = "0.7.1"
 PR = "r0"
 
-inherit appimage_package
-FNAME="sigrok-cli-${PV}-x86_64.AppImage"
-SRC_URI = "https://sigrok.org/download/binary/sigrok-cli/${FNAME}"
+inherit bb_fetcher
+addtask do_unpack before do_build
+SRCFILENAME="sigrok-cli-${PV}-x86_64.AppImage"
+SRC_URI = "https://sigrok.org/download/binary/sigrok-cli/${SRCFILENAME}"
 SRC_URI[sha256sum] = "6efc5abd2797b7ffcbe6beb5fd4338e54b699db678c9d847b275456e5d4856f4"
 
-do_install() {
-    local dest="${D}/${bindir}"
-    local fname="${FNAME}"
-
-    install -d "${dest}"
-    install --target-directory "${dest}" \
-        "${WORKDIR}/${fname}"
-    ln -fsT \
-        "${fname}" \
-        "${dest}/sigrok-cli"
+inherit install_bin_appimage
+do_build() {
+    install_bin_appimage_with_name "${WORKDIR}/${SRCFILENAME}" "sigrok-cli"
 }
