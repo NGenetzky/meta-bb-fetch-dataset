@@ -12,3 +12,4 @@ repos:
   meta-bb-fetch-dataset:
     layers:
       meta-com-github:
+      meta-appimage-bin:
