@@ -1,17 +1,14 @@
 SUMMARY = "PulseView is a Qt based logic analyzer, oscilloscope and MSO GUI for sigrok."
 HOMEPAGE = "https://sigrok.org/wiki/Downloads#Linux_AppImage_binaries"
 
-PV = "2018.10.06"
+PV = "0.4.2"
 PR = "r0"
-
-PLATFORM="native-x86_64-appimage"
-FNAME="PulseView-NIGHTLY-x86_64.AppImage"
 
 inherit appimage_package
 
-SRC_URI = " \
-    https://sigrok.org/jenkins/job/sigrok-native-appimage/lastSuccessfulBuild/platform=${PLATFORM}/artifact/cross-compile/appimage/out/${FNAME} \
-"
+FNAME="PulseView-${PV}-x86_64.AppImage"
+SRC_URI = "https://sigrok.org/download/binary/pulseview/PulseView-${PV}-x86_64.AppImage"
+SRC_URI[sha256sum] = "aed42a428c202d799a0374b32ad6500be9197725c376f1d9431b6ad3c28fdbf1"
 
 do_install() {
     local dest="${D}/${bindir}"

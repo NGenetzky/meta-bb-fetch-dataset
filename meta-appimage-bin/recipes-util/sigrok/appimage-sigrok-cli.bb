@@ -1,17 +1,13 @@
 SUMMARY = "sigrok-cli is a command-line frontend for sigrok."
 HOMEPAGE = "https://sigrok.org/wiki/Downloads#Linux_AppImage_binaries"
 
-PV = "2018.10.06"
+PV = "0.7.1"
 PR = "r0"
 
-PLATFORM="native-x86_64-appimage"
-FNAME="sigrok-cli-NIGHTLY-x86_64.AppImage"
-
 inherit appimage_package
-
-SRC_URI = " \
-    https://sigrok.org/jenkins/job/sigrok-native-appimage/lastSuccessfulBuild/platform=${PLATFORM}/artifact/cross-compile/appimage/out/${FNAME} \
-"
+FNAME="sigrok-cli-${PV}-x86_64.AppImage"
+SRC_URI = "https://sigrok.org/download/binary/sigrok-cli/${FNAME}"
+SRC_URI[sha256sum] = "6efc5abd2797b7ffcbe6beb5fd4338e54b699db678c9d847b275456e5d4856f4"
 
 do_install() {
     local dest="${D}/${bindir}"
