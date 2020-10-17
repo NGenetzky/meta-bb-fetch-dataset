@@ -10,11 +10,7 @@ SRC_URI = "https://github.com/skx/github2mr/releases/download/v${PV}/${SRCNAME};
 SRC_URI[amd64.md5sum] = "da350ff2ce8b4776dfb2ae8c8bcce60c"
 SRC_URI[amd64.sha256sum] = "811752061fbd68889e9f5982de2c08aa9b66085a7c5959076e5c24ffe0e50329"
 
-do_build[dirs] = "${S}"
+inherit install_bin_go
 do_build(){
-    install -d \
-        "${D}/usr/local/bin/"
-    install -T \
-        "${WORKDIR}/${SRCNAME}" \
-        "${D}/usr/local/bin/github2mr"
+    install_bin_go_with_name "${WORKDIR}/${SRCNAME}" 'github2mr'
 }
